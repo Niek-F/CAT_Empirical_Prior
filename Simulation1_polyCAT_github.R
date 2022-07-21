@@ -4,6 +4,9 @@
 ### Risks and Rewards in Clinical Settings  ###
 ###############################################
 
+# Set directory to file location
+setwd(paste0(dirname(rstudioapi::getActiveDocumentContext()$path)))
+
 # Override run_local function to set prior_sd at a later stage
 source("run_local2.R")
 environment(run_local) <- asNamespace('mirtCAT')
@@ -197,7 +200,7 @@ repeat{ # Repeat the following for Iter_max iterations
           # Save as csv files
           filename    <- paste("Sim_poly",Iter,"_I",n_items,"min",min_items,
                                "_bias",bias,"_sigma",prior_sd,".csv",sep = "")
-          write.table(dat,file = paste0("Output APM comp/",filename), sep = ";",
+          write.table(dat,file = filename, sep = ";",
                       dec = ",", row.names = F)
           
           
@@ -213,7 +216,7 @@ repeat{ # Repeat the following for Iter_max iterations
     break
   }else{
     end_seed  <- .Random.seed
-    save(end_seed, file = paste0("Output APM comp/","Random_seed_endIter",Iter-1,".R")) # Save seed 
+    save(end_seed, file = paste0("Random_seed_endIter",Iter-1,".R")) # Save seed 
     next
   }
 }
