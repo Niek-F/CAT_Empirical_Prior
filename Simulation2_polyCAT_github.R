@@ -4,6 +4,9 @@
 ### Risks and Rewards in Clinical Settings  ###
 ###############################################
 
+# Set working directory to file path
+setwd(paste0(dirname(rstudioapi::getActiveDocumentContext()$path)))
+
 # Override run_local function to set prior_sd at a later stage
 source("run_local2.R")
 environment(run_local) <- asNamespace('mirtCAT')
@@ -16,9 +19,7 @@ assignInNamespace("run_local", run_local, ns = "mirtCAT",pos = "package:mirtCAT"
 # Setting seed
 set.seed(269513)
 
-# Setting working directory and loading relevant packages
-setwd(paste0(dirname(rstudioapi::getActiveDocumentContext()$path)))
-
+# Loading relevant packages
 pkg <- c("mirt","mirtCAT")
 sapply(pkg,library,character.only=TRUE,logical.return = TRUE)
 
